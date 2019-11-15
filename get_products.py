@@ -1,13 +1,13 @@
 import re
 
 
-def prepared_products_data():
+def get_products_data():
     with open('./action.txt', 'r', encoding='utf-8-sig') as target:
         all_data = target.read()
 
     category_names = list(re.findall(r"#.*$", all_data, re.M))
-    category_names_clear = [(i.replace("#", "").strip())
-                            for i in category_names]
+    category_names_clear = [(item.replace("#", "").strip())
+                            for item in category_names]
 
     items_data = all_data.split('\n\n\n')
 
@@ -25,11 +25,13 @@ def prepared_products_data():
 
                 splited_characteristic = characteristic.split(':')
                 if len(splited_characteristic) == 2:
-                    k, v = splited_characteristic
-                else:
+                    key, value = splited_characteristic
+
+                elif 'Выгодное предложение' in splited_characteristic:
+                    
                     splited_characteristic.append('proposition')
-                    v, k = splited_characteristic
-                characteristics_data[k] = v
+                    value, key = splited_characteristic
+                characteristics_data[key] = value
             products.append(characteristics_data)
         products_data[category_names_clear[index]] = products
 
@@ -37,4 +39,4 @@ def prepared_products_data():
 
 
 if __name__ == "__main__":
-    print(prepared_products_data())
+    print(get_products_data())
