@@ -1,42 +1,48 @@
 import re
 
 
-def get_products_data():
+def open_file():
     with open('./action.txt', 'r', encoding='utf-8-sig') as target:
-        all_data = target.read()
+        return target.read()
 
-    category_names = list(re.findall(r"#.*$", all_data, re.M))
-    category_names_clear = [(item.replace("#", "").strip())
-                            for item in category_names]
 
-    items_data = all_data.split('\n\n\n')
+def get_products():
+    text = open_file()
+
+    category_names = list(re.findall(r"#.*$", text, re.M))
+    cleared_category_names = [(item.replace("#", "").strip())
+                              for item in category_names]
+
+    items = text.split('\n\n\n')
 
     for name in category_names:
-        items_data.remove(name)
+        items.remove(name)
 
-    products_data = {}
+    production = {}
 
-    for index, items_in_category in enumerate(items_data):
+    for index, items_in_category in enumerate(items):
         products = []
-        for characteristics in items_in_category.split('\n\n'):
-            characteristics_data = {}
+        for item in items_in_category.split('\n\n'):
 
-            for characteristic in characteristics.split('\n'):
+            characteristics = {}
 
-                splited_characteristic = characteristic.split(':')
-                if len(splited_characteristic) == 2:
-                    key, value = splited_characteristic
+            for characteristic in item.split('\n'):
 
-                elif 'Выгодное предложение' in splited_characteristic:
-                    
-                    splited_characteristic.append('proposition')
-                    value, key = splited_characteristic
-                characteristics_data[key] = value
-            products.append(characteristics_data)
-        products_data[category_names_clear[index]] = products
+                splitted_characteristic = characteristic.split(':')
+                if len(splitted_characteristic) == 2:
+                    key, value = splitted_characteristic
 
-    return products_data
+                elif 'Выгодное предложение' in splitted_characteristic:
+
+                    key = 'proposition'
+                    value = splitted_characteristic[0]
+
+                characteristics[key] = value
+            products.append(characteristics)
+        production[cleared_category_names[index]] = products
+
+    return production
 
 
 if __name__ == "__main__":
-    print(get_products_data())
+    print(get_products())

@@ -1,13 +1,13 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from get_products import get_products_data
+from get_products import get_products
 import datetime
 
 if __name__ == "__main__":
 
-    FOUNDATION_DATE = 1920
+    foundation_date = 1920
     now = datetime.datetime.now()
-    company_age = now.year-FOUNDATION_DATE
+    company_age = now.year-foundation_date
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     template = env.get_template('template.html')
 
     rendered_page = template.render(
-        company_age=company_age, collections=get_products_data())
+        company_age=company_age, collections=get_products())
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
