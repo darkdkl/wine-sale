@@ -16,8 +16,10 @@ if __name__ == "__main__":
 
     template = env.get_template('template.html')
 
-    rendered_page = template.render(
-        company_age=company_age, collections=get_products())
+    with open('./action.txt', 'r', encoding='utf-8-sig') as text_file:
+
+        rendered_page = template.render(
+            company_age=company_age, collections=get_products(text_file.read()))
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)

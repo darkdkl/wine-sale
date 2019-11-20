@@ -1,19 +1,13 @@
 import re
 
 
-def open_file():
-    with open('./action.txt', 'r', encoding='utf-8-sig') as target:
-        return target.read()
+def get_products(text_file):
 
-
-def get_products():
-    text = open_file()
-
-    category_names = list(re.findall(r"#.*$", text, re.M))
+    category_names = list(re.findall(r"#.*$", text_file, re.M))
     cleared_category_names = [(item.replace("#", "").strip())
                               for item in category_names]
 
-    items = text.split('\n\n\n')
+    items = text_file.split('\n\n\n')
 
     for name in category_names:
         items.remove(name)

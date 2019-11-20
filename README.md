@@ -6,7 +6,7 @@
 
 - Скачайте код
 - Установите зависимости командой `pip install -r requirements.txt`
-- Переименуйте файл action_example.txt в action.txt
+- Создайте копию файла action_example.txt и дайте имя action.txt
 - Запустите сайт командой `python3 main.py`
 - Перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
