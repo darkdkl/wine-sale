@@ -39,4 +39,5 @@ def get_products(text_file):
 
 
 if __name__ == "__main__":
-    print(get_products())
+    with open('./action.txt', 'r', encoding='utf-8-sig') as text_file:
+        print(get_products(text_file.read()))
