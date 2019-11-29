@@ -2,7 +2,7 @@ import re
 
 
 def get_products(text_file):
-
+    text_file = text_file.read()
     category_names = list(re.findall(r"#.*$", text_file, re.M))
     cleared_category_names = [(item.replace("#", "").strip())
                               for item in category_names]
@@ -40,4 +40,4 @@ def get_products(text_file):
 
 if __name__ == "__main__":
     with open('./action.txt', 'r', encoding='utf-8-sig') as text_file:
-        print(get_products(text_file.read()))
+        print(get_products(text_file))
